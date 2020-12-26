@@ -8,11 +8,12 @@ class Create extends Component {
 
   constructor() {
     super();
-    this.ref = firebase.firestore().collection('trackers');
+    this.ref = firebase.firestore().collection('trackers').doc(this.props.match.params.id).collections(locations); //check this
     this.state = {
-      title: '',
-      description: '',
-      author: ''
+      name: '',
+      canal: '',
+      closesttown: '',
+      comment: '',
     };
   }
   onChange = (e) => {
@@ -24,22 +25,20 @@ class Create extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { title, description, author } = this.state;
-    console.log("on submit beginning")
-    console.log(title, description, author)
+    const { name, canal, closesttown, comment } = this.state;
     this.ref.add({
-      title,
-      description,
-      author
+      name,
+      canal,
+      closesttown,
+      comment
     }).then((docRef) => {
       this.setState({
-        title: '',
-        description: '',
-        author: ''
+        name: '',
+        canal: '',
+        closesttown: '',
+        comment: ''
       });
       this.props.history.push("/")
-      console.log("on submit")
-      console.log(title, description, author)
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -47,18 +46,18 @@ class Create extends Component {
   }
 
   render() {
-    const { title, description, author } = this.state;
+    const { name, canal, closesttown, comment } = this.state;
     return (
       <div className="container">
         <div className="panel panel-default">
           <div className="panel-heading">
             <Header/>
             <h3 className="panel-title">
-              ADD TRACKER
+              ADD ENTRY
             </h3>
-          </div>
+          </div> 
           <div className="panel-body">
-            <h4><Link to="/" className="btn btn-primary">Return to Tracker List</Link></h4>
+            <h4><Link to={`/trackers/{this.props.match.params.id}`} className="btn btn-primary">Return to Tracker List</Link></h4>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label for="title">Title:</label>
@@ -83,4 +82,4 @@ class Create extends Component {
   }
 }
 
-export default Create;
+export default CreateStringEntry;

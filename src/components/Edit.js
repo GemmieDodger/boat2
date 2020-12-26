@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from '../Firebase';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import Header from './Header';
 
 class Edit extends Component {
 
@@ -42,7 +43,7 @@ class Edit extends Component {
 
     const { title, description, author } = this.state;
 
-    const updateRef = firebase.firestore().collection('boards').doc(this.state.key);
+    const updateRef = firebase.firestore().collection('trackers').doc(this.state.key);
     updateRef.set({
       title,
       description,
@@ -63,29 +64,30 @@ class Edit extends Component {
 
   render() {
     return (
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              EDIT BOARD
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <Header/>
+            <h3 className="panel-title">
+              EDIT TRACKER
             </h3>
           </div>
-          <div class="panel-body">
-            <h4><Link to={`/show/${this.state.key}`} class="btn btn-primary">Board List</Link></h4>
+          <div className="panel-body">
+            <Header/>
             <form onSubmit={this.onSubmit}>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="title">Title:</label>
-                <input type="text" class="form-control" name="title" value={this.state.title} onChange={this.onChange} placeholder="Title" />
+                <input type="text" className="form-control" name="title" value={this.state.title} onChange={this.onChange} placeholder={this.state.title} />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="description">Description:</label>
-                <input type="text" class="form-control" name="description" value={this.state.description} onChange={this.onChange} placeholder="Description" />
+                <input type="text" className="form-control" name="description" value={this.state.description} onChange={this.onChange} placeholder={this.state.description} />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label for="author">Author:</label>
-                <input type="text" class="form-control" name="author" value={this.state.author} onChange={this.onChange} placeholder="Author" />
+                <input type="text" className="form-control" name="author" value={this.state.author} onChange={this.onChange} placeholder={this.state.author} />
               </div>
-              <button type="submit" class="btn btn-success">Submit</button>
+              <button type="submit" className="btn btn-success">Submit</button>
             </form>
           </div>
         </div>

@@ -8,6 +8,8 @@ import App from './App';
 import Edit from './components/Edit';
 import Create from './components/Create';
 import Show from './components/Show';
+import ShowDates from './components/ShowDates';
+import ShowStrings from './components/ShowStrings';
 
 ReactDOM.render(
   <Router>
@@ -16,6 +18,8 @@ ReactDOM.render(
         <Route path='/edit/:id' component={Edit} />
         <Route path='/create' component={Create} />
         <Route path='/show/:id' component={Show} />
+        <Route path='/showDates/:id' component={ShowDates} />
+        <Route path='/showStrings/:id' component={ShowStrings} />
       </div>
   </Router>,
   document.getElementById('root')

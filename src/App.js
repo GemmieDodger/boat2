@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
 import firebase from './Firebase';
+import Header from './components/Header';
 
 class App extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class App extends Component {
     this.ref = firebase.firestore().collection('trackers');
     this.unsubscribe = null;
     this.state = {
-      trackers: []
+      trackers: [],
+      path: '',
     };
   }
 
@@ -34,18 +36,37 @@ class App extends Component {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
   }
 
+ checkType(key, title) {
+    console.log(title)
+  //  console.log(this.state.path)
+    // const state = this.state
+    // state[e.target.path] = e.target.value;
+  //  this.setState(state);
+
+    if (title === 'Location') {
+      console.log(title)
+        this.setState({
+          path: `/showStrings/${key}`})
+      } else {
+        this.setState({
+          path: `/showDates/${key}`})
+    }
+    console.log(this.state.path)
+  }
+
   render() {
     return (
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <Header/>
+            <h3 className="panel-title">
               MY TRACKERS
             </h3>
           </div>
-          <div class="panel-body">
+          <div className="panel-body">
             <h4><Link to="/create">Add Tracker</Link></h4>
-            <table class="table table-stripe">
+            <table className="table table-stripe">
               <thead>
                 <tr>
                   <th>Title</th>
@@ -56,7 +77,9 @@ class App extends Component {
               <tbody>
                 {this.state.trackers.map(tracker =>
                   <tr>
-                    <td><Link to={`/show/${tracker.key}`}>{tracker.title}</Link></td>
+                    <td><Link onClick={
+                      () => this.checkType(tracker.key, tracker.title)} to={this.state.path}>
+                      {tracker.title}</Link></td>
                     <td>{tracker.description}</td>
                     <td>{tracker.author}</td>
                   </tr>

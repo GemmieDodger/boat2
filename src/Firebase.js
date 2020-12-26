@@ -7,13 +7,12 @@ import 'firebase/database';
 const settings = {timestampsInSnapshots: true};
 
 const config = {
-  apiKey: "AIzaSyBGlkRTKuhU6VoMy8OAUdEJnzk1vUDZtps",
-  authDomain: "boat2-b2019.firebaseapp.com",
-  databaseURL: "https://boat2-b2019-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "boat2-b2019",
-  storageBucket: "boat2-b2019.appspot.com",
-  messagingSenderId: "990646186891",
-  appId: "1:990646186891:web:7223deb587f259694b758e"
+  apiKey: "AIzaSyDajJG4U9UkF7D6gR8AFt6KlaPBw-1fBrA",
+  authDomain: "boat-8b6ba.firebaseapp.com",
+  projectId: "boat-8b6ba",
+  storageBucket: "boat-8b6ba.appspot.com",
+  messagingSenderId: "114622342287",
+  appId: "1:114622342287:web:90a4437869480710867cfa"
 };
 firebase.initializeApp(config);
 
