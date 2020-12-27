@@ -27,6 +27,7 @@ class App extends Component {
         author,
       });
     });
+    console.log(trackers);
     this.setState({
       trackers
    });
@@ -37,21 +38,14 @@ class App extends Component {
   }
 
  checkType(key, title) {
-    console.log(title)
-  //  console.log(this.state.path)
-    // const state = this.state
-    // state[e.target.path] = e.target.value;
-  //  this.setState(state);
-
     if (title === 'Location') {
       console.log(title)
         this.setState({
-          path: `/showStrings/${key}`})
+          path: `/showstrings/${key}`})
       } else {
         this.setState({
-          path: `/showDates/${key}`})
+          path: `/showdates/${key}`})
     }
-    console.log(this.state.path)
   }
 
   render() {

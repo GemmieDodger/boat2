@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "firebase": "^8.2.1",
+    "firebase-functions": "^3.13.0",
     "firebase-tools": "github:firebase/firebase-tools",
     "firestore": "^1.1.6",
     "react": "^17.0.1",

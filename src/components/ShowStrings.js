@@ -7,10 +7,12 @@ import Header from './Header';
 class ShowStrings extends Component {
   constructor(props) {
     super(props);
+    this.col = firebase.firestore().collection('trackers').doc(this.props.match.params.id).collection('locations');
+    this.unsubscribe = null;
     this.state = {
       tracker: {},
       key: '',
-      locations:{}
+      locations: [],
     };
   }
 //check tracker exists + set state
@@ -22,23 +24,14 @@ class ShowStrings extends Component {
           tracker: doc.data(),
           key: doc.id,
           isLoading: false
-        });
-        console.log(this.state.tracker)
+        });        
+
       } else {
+
         console.log("No such document!");
       }
     });
-    ref = firebase.firestore().collection('trackers').doc(this.props.match.params.id).collection('locations');
-    ref.get().then((doc) => {
-      if (doc.exists) {
-        this.setState({
-          locations: collection.data(),
-        });
-        console.log(this.state.locations)
-      } else {
-        console.log("No such document!");
-      }
-    });
+    this.unsubscribe = this.col.onSnapshot(this.onCollectionUpdate);
   }
 //delete tracker
   delete(id){
@@ -49,22 +42,25 @@ class ShowStrings extends Component {
       console.error("Error removing document: ", error);
     });
   }
-//   onCollectionUpdate = (querySnapshot) => {
-//     const trackers = [];
-//     querySnapshot.forEach((doc) => {
-//       const { title, description, author } = doc.data();
-//       trackers.push({
-//         key: doc.id,
-//         doc, // DocumentSnapshot
-//         title,
-//         description,
-//         author,
-//       });
-//     });
-//     this.setState({
-//       trackers
-//    });
-//   }
+  onCollectionUpdate = (querySnapshot) => {
+    const locations = [];
+    querySnapshot.forEach((doc) => {
+      const { name, canal, closesttown ,comments } = doc.data();
+      locations.push({
+        key: doc.id,
+        doc, // DocumentSnapshot
+        name,
+        canal,
+        closesttown,
+        comments,
+      });
+    });
+    this.setState({
+      locations
+   });
+   console.log(this.state.tracker)
+   console.log(this.state.locations);
+  }
 
 //   componentDidMount() {
 //     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
@@ -82,25 +78,25 @@ class ShowStrings extends Component {
             <h5>{this.state.tracker.description}</h5>
           </div>
           <div className="panel-body">
-            <h4><Link to="/createStringEntry">Add new entry</Link></h4>
+            <h4><Link to={`/showstrings/${this.props.match.params.id}/createstringentry`}>Add new entry</Link></h4>
             <table className="table table-stripe">
               <thead>
                 <tr>
                   <th>Name</th>
                   <th>Canal</th>
                   <th>Closest Town</th>
-                  <th>Comment</th>
+                  <th>Comments</th>
                 </tr>
               </thead>
               <tbody>
-                {/* {this.state.tracker.locations.map(entry =>
+                {this.state.locations?.map(location =>
                   <tr>
-                    <td><Link to={`${this.state.tracker.key}/showDates/${entry.key}`}>{entry.name}</Link></td>
-                    <td>{entry.canal}</td>
-                    <td>{entry.closesttown}</td>
-                    <td>{entry.comment}</td>
+                    <td><Link to={`${this.state.tracker.key}/locations/${location.key}`}>{location.name}</Link></td>
+                    <td>{location.canal}</td>
+                    <td>{location.closesttown}</td>
+                    <td>{location.comments}</td>
                   </tr>
-                )} */}
+                )}
               </tbody>
             </table>
           </div>

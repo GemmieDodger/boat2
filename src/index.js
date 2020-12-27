@@ -10,6 +10,7 @@ import Create from './components/Create';
 import Show from './components/Show';
 import ShowDates from './components/ShowDates';
 import ShowStrings from './components/ShowStrings';
+import CreateStringEntry from './components/CreateStringEntry';
 
 ReactDOM.render(
   <Router>
@@ -18,8 +19,9 @@ ReactDOM.render(
         <Route path='/edit/:id' component={Edit} />
         <Route path='/create' component={Create} />
         <Route path='/show/:id' component={Show} />
-        <Route path='/showDates/:id' component={ShowDates} />
-        <Route path='/showStrings/:id' component={ShowStrings} />
+        <Route path='/showdates/:id' component={ShowDates} />
+        <Route exact path='/showstrings/:id' component={ShowStrings} />
+        <Route exact path='/showstrings/:id/createstringentry' component={CreateStringEntry} />
       </div>
   </Router>,
   document.getElementById('root')
