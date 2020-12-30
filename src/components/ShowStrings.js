@@ -75,7 +75,7 @@ class ShowStrings extends Component {
             <h3 className="panel-title">
               {this.state.tracker.title}
             </h3>
-            <Link to={`/edit/${this.state.key}`}><h5>{this.state.tracker.description}</h5></Link>
+            <Link to={`/edit/${this.state.key}`}><h5>{this.state.tracker.description}</h5></Link>ibifedrtijteftddtrlvlkffknrgjgff
           </div>
           <div className="panel-body">
             <h4><Link to={`/showstrings/${this.props.match.params.id}/createstringentry`}>Add new entry</Link></h4>
