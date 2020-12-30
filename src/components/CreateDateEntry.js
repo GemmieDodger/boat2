@@ -3,18 +3,22 @@ import React, { Component } from 'react';
 import firebase from '../Firebase';
 import { Link } from 'react-router-dom';
 import Header from './Header';
+import DatePicker from "react-datepicker";
+ 
+import "react-datepicker/dist/react-datepicker.css";
 
 class CreateDateEntry extends Component {
 
   constructor(props) {
     super(props);
-    this.col = firebase.firestore().collection('trackers').doc(this.props.match.params.id).collection('locations');
+    this.col = firebase.firestore().collection('trackers').doc(this.props.match.params.id).collection('entries');
     this.state = {
-      name: '',
-      canal: '',
-      closesttown: '',
+      date: new Date(),
+      quantity: '',
+      //dateExample: firebase.firestore.Timestamp.fromDate(new Date("December 10, 1815")),
       comments: '',
     };
+    this.handleDateChange = this.handleDateChange.bind(this);
   }
   onChange = (e) => {
     const state = this.state
@@ -22,20 +26,24 @@ class CreateDateEntry extends Component {
     this.setState(state);
   }
 
+  handleDateChange(startDate) {
+    this.setState({
+      date: startDate
+    })
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { name, canal, closesttown, comments } = this.state;
+    const { date, quantity, comments } = this.state;
     this.col.add({
-      name,
-      canal,
-      closesttown,
+      date,
+      quantity,
       comments
     }).then((docRef) => {
       this.setState({
-        name: '',
-        canal: '',
-        closesttown: '',
+        date: '',
+        quantity: '',
         comments: ''
       });
       this.props.history.push(`/showStrings/${this.props.match.params.id}`)
@@ -44,9 +52,9 @@ class CreateDateEntry extends Component {
       console.error("Error adding document: ", error);
     });
   }
-
+  
   render() {
-    const { name, canal, closesttown, comments } = this.state;
+    const { date, quantity, comments } = this.state;
     return (
       <div className="container">
         <div className="panel panel-default">
@@ -60,20 +68,16 @@ class CreateDateEntry extends Component {
             <h4><Link to={`/trackers/${this.props.match.params.id}`} className="btn btn-primary">Return to Tracker</Link></h4>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
-                <label for="name">Name:</label>
-                <input type="text" className="form-control" name="name" value={name} onChange={this.onChange} placeholder="Name" />
-              </div>
+                <label for="date">Date:</label>
+                <DatePicker name="date" selected={this.state.date} value={date} onChange={this.handleDateChange} dateFormat="dd/MM/yyyy"/>
+              </div> 
               <div className="form-group">
-                <label for="canal">Canal:</label>
-                <input type="text" className="form-control" name="canal" value={canal} onChange={this.onChange} placeholder="Canal" />                
-              </div>
-              <div className="form-group">
-                <label for="closesttown">Closest Town:</label>
-                <input type="text" className="form-control" name="closesttown" value={closesttown} onChange={this.onChange} placeholder="Closest Town" />
+                <label for="quantity">Quantity:</label>
+                <input type="number" className="form-control" name="quantity" value={quantity} onChange={this.onChange} placeholder="How many?" />                
               </div>
               <div className="form-group">
                 <label for="comments">Comments:</label>
-                <textArea className="form-control" name="comments" onChange={this.onChange} placeholder="Comments" cols="80" rows="3">{comments}</textArea>
+                <textArea className="form-control" name="comments" onChange={this.onChange} placeholder="any further notes?" cols="80" rows="3">{comments}</textArea>
               </div>
                 <button type="submit"  className="btn btn-success">Submit</button>
              
