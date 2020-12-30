@@ -11,20 +11,21 @@ class Edit extends Component {
       key: '',
       title: '',
       description: '',
-      author: ''
+      author: '',
+      path: '',
     };
   }
 
   componentDidMount() {
-    const ref = firebase.firestore().collection('boards').doc(this.props.match.params.id);
+    const ref = firebase.firestore().collection('trackers').doc(this.props.match.params.id);
     ref.get().then((doc) => {
       if (doc.exists) {
-        const board = doc.data();
+        const tracker = doc.data();
         this.setState({
           key: doc.id,
-          title: board.title,
-          description: board.description,
-          author: board.author
+          title: tracker.title,
+          description: tracker.description,
+          author: tracker.author
         });
       } else {
         console.log("No such document!");
@@ -55,7 +56,17 @@ class Edit extends Component {
         description: '',
         author: ''
       });
-      this.props.history.push("/show/"+this.props.match.params.id)
+      if (this.state.title === 'location') {
+        this.setState({
+          path: 'showstrings',
+        }) 
+      } else {
+        this.setState({
+          path: 'showdates',
+        })
+          
+      }
+      this.props.history.push(`/${this.state.path}/${this.props.match.params.id}`)
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
@@ -73,7 +84,6 @@ class Edit extends Component {
             </h3>
           </div>
           <div className="panel-body">
-            <Header/>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label for="title">Title:</label>
