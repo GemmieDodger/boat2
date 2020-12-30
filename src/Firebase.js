@@ -7,6 +7,8 @@ import 'firebase/database';
 const settings = {timestampsInSnapshots: true};
 
 const config = {
+
+  //called BOAT
   apiKey: "AIzaSyDajJG4U9UkF7D6gR8AFt6KlaPBw-1fBrA",
   authDomain: "boat-8b6ba.firebaseapp.com",
   projectId: "boat-8b6ba",

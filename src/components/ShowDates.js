@@ -46,11 +46,18 @@ class ShowDates extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const entries = []; 
     querySnapshot.forEach((doc) => {
-      const { quantity, comments } = doc.data();
+      // const dateInMillis = timeStampDate.seconds * 1000;
+      // var date = new Date(doc.date.toDateString());
+
+
+      const { 
+        quantity, 
+        comments } = doc.data();
+        const date = new Date(doc.data().date.seconds*1000).toLocaleDateString("en-IN");
       entries.push({
         key: doc.id,
         doc, // DocumentSnapshot
-        date: [],
+        date,
         quantity,
         comments,
       });
@@ -58,13 +65,7 @@ class ShowDates extends Component {
     this.setState({
       entries
    });
-   console.log(this.state.tracker)
-   console.log(this.state.entries);
   }
-
-//   componentDidMount() {
-//     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-//   }
 
   render() {
     return (
