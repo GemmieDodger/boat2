@@ -43,6 +43,19 @@ class ShowDates extends Component {
       console.error("Error removing document: ", error);
     });
   }
+
+  deleteEntry(entryId){
+    console.log(this.props.match.params.id);
+    console.log(entryId);
+    firebase.firestore().collection('trackers').doc(this.props.match.params.id).collection('entries').doc(entryId).delete().then(() => {
+ 
+      console.log("Document successfully deleted!");
+      this.props.history.push(`/showdates/${this.props.match.params.id}`)
+    }).catch((error) => {
+      console.error("Error removing document: ", error);
+    });
+  }
+
   onCollectionUpdate = (querySnapshot) => {
     const entries = []; 
     querySnapshot.forEach((doc) => {
@@ -86,6 +99,7 @@ class ShowDates extends Component {
                   <th>Date</th>
                   <th>Quantity</th>
                   <th>Comments</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -94,6 +108,7 @@ class ShowDates extends Component {
                     <td><Link to={`${this.state.tracker.key}/l${this.state.tracker.title}/${entry.key}`}>{entry.date}</Link></td>
                     <td>{entry.quantity}</td>
                     <td>{entry.comments}</td>
+                    <td><button onClick={this.deleteEntry.bind(this, entry.key).bind(this, this.state.tracker.key)} className="btn btn-danger">Delete Entry</button></td>
                   </tr>
                 )}
               </tbody>

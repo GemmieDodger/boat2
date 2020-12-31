@@ -18,13 +18,13 @@ class App extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const trackers = [];
     querySnapshot.forEach((doc) => {
-      const { title, description, author } = doc.data();
+      const { title, description, boat } = doc.data();
       trackers.push({
         key: doc.id,
         doc, // DocumentSnapshot
         title,
         description,
-        author,
+        boat,
       });
     });
     console.log(trackers);
@@ -65,7 +65,7 @@ class App extends Component {
                 <tr>
                   <th>Title</th>
                   <th>Description</th>
-                  <th>Author</th>
+                  <th>Boat Name</th>
                 </tr>
               </thead>
               <tbody>
@@ -75,7 +75,7 @@ class App extends Component {
                       () => this.checkType(tracker.key, tracker.title)} to={this.state.path}>
                       {tracker.title}</Link></td>
                     <td>{tracker.description}</td>
-                    <td>{tracker.author}</td>
+                    <td>{tracker.boat}</td>
                   </tr>
                 )}
               </tbody>
