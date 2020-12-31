@@ -12,18 +12,22 @@ import ShowDates from './components/ShowDates';
 import ShowStrings from './components/ShowStrings';
 import CreateStringEntry from './components/CreateStringEntry';
 import CreateDateEntry from './components/CreateDateEntry';
+import EditStringEntry from './components/EditStringEntry';
+import EditDateEntry from './components/EditDateEntry';
 
 ReactDOM.render(
   <Router>
       <div>
         <Route exact path='/' component={App} />
-        <Route path='/edit/:id' component={Edit} />
-        <Route path='/create' component={Create} />
-        <Route path='/show/:id' component={Show} />
+        <Route exact path='/edit/:id' component={Edit} />
+        <Route exact path='/create' component={Create} />
+        <Route exact path='/show/:id' component={Show} />
         <Route exact path='/showdates/:id' component={ShowDates} />
         <Route exact path='/showstrings/:id' component={ShowStrings} />
         <Route exact path='/showstrings/:id/createstringentry' component={CreateStringEntry} />
         <Route exact path='/showdates/:id/createdateentry' component={CreateDateEntry} />
+        <Route exact path='/showstrings/:id/editstringentry/:entryId' component={EditStringEntry} />
+        <Route exact path='/showdates/:id/editdateentry/:entryId' component={EditDateEntry} />
       </div>
   </Router>,
   document.getElementById('root')

@@ -45,8 +45,6 @@ class ShowDates extends Component {
   }
 
   deleteEntry(entryId){
-    console.log(this.props.match.params.id);
-    console.log(entryId);
     firebase.firestore().collection('trackers').doc(this.props.match.params.id).collection('entries').doc(entryId).delete().then(() => {
  
       console.log("Document successfully deleted!");
@@ -89,7 +87,7 @@ class ShowDates extends Component {
             <h3 className="panel-title">
               {this.state.tracker.title}
             </h3>
-            <Link to={`/edit/${this.state.key}`}><h5>{this.state.tracker.description}</h5></Link>
+            <Link to={`/showdates/${this.props.match.params.id}/edit/${this.state.key}`}><h5>{this.state.tracker.description}</h5></Link>
           </div>
           <div className="panel-body">
             <h4><Link to={`/showdates/${this.props.match.params.id}/createdateentry`}>Add new entry</Link></h4>
@@ -105,7 +103,7 @@ class ShowDates extends Component {
               <tbody>
                 {this.state.entries?.map(entry =>
                   <tr>
-                    <td><Link to={`${this.state.tracker.key}/l${this.state.tracker.title}/${entry.key}`}>{entry.date}</Link></td>
+                    <td><Link to={`/showdates/${this.props.match.params.id}/editdateentry/${entry.key}`}>{entry.date}</Link></td>
                     <td>{entry.quantity}</td>
                     <td>{entry.comments}</td>
                     <td><button onClick={this.deleteEntry.bind(this, entry.key).bind(this, this.state.tracker.key)} className="btn btn-danger">Delete Entry</button></td>

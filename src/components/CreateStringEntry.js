@@ -8,7 +8,7 @@ class CreateStringEntry extends Component {
 
   constructor(props) {
     super(props);
-    this.col = firebase.firestore().collection('trackers').doc(this.props.match.params.id).collection('locations');
+    this.col = firebase.firestore().collection('trackers').doc(this.props.match.params.id).collection('entries');
     this.state = {
       name: '',
       canal: '',
