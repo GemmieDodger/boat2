@@ -4,6 +4,7 @@ import firebase from '../Firebase';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import DatePicker from "react-datepicker";
+import './stylesheet.css';
  
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -56,35 +57,38 @@ class CreateDateEntry extends Component {
   render() {
     const { date, quantity, comments } = this.state;
     return (
-      <div className="container">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <Header/>
-            <h3 className="panel-title">
-              ADD ENTRY
-            </h3>
-          </div> 
-          <div className="panel-body">
-            <h4><Link to={`/trackers/showdates/${this.props.match.params.id}`} className="btn btn-primary">Return to Tracker</Link></h4>
-            <form onSubmit={this.onSubmit}>
-              <div className="form-group">
-                <label for="date">Date:</label>
-                <DatePicker name="date" selected={this.state.date} value={date} onChange={this.handleDateChange} dateFormat="dd/MM/yyyy"/>
-              </div> 
-              <div className="form-group">
-                <label for="quantity">Quantity:</label>
-                <input type="number" className="form-control" name="quantity" value={quantity} onChange={this.onChange} placeholder="How many?" />                
+      <div>
+        <Header/>
+            <div className="container">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+
+                  <h3 className="panel-title">
+                    ADD ENTRY
+                  </h3>
+                </div> 
+                <div className="panel-body">
+                  <h4><Link to={`/trackers/showdates/${this.props.match.params.id}`} className="btn btn-primary">Return to Tracker</Link></h4>
+                  <form onSubmit={this.onSubmit}>
+                    <div className="form-group">
+                      <label for="date">Date:</label>
+                      <DatePicker name="date" selected={this.state.date} value={date} onChange={this.handleDateChange} dateFormat="dd/MM/yyyy"/>
+                    </div> 
+                    <div className="form-group">
+                      <label for="quantity">Quantity:</label>
+                      <input type="number" className="form-control" name="quantity" value={quantity} onChange={this.onChange} placeholder="How many?" />                
+                    </div>
+                    <div className="form-group">
+                      <label for="comments">Comments:</label>
+                      <textArea className="form-control" name="comments" onChange={this.onChange} placeholder="any further notes?" cols="80" rows="3">{comments}</textArea>
+                    </div>
+                      <button type="submit"  className="btn btn-success">Submit</button>
+                  
+                  </form>
+                </div>
               </div>
-              <div className="form-group">
-                <label for="comments">Comments:</label>
-                <textArea className="form-control" name="comments" onChange={this.onChange} placeholder="any further notes?" cols="80" rows="3">{comments}</textArea>
-              </div>
-                <button type="submit"  className="btn btn-success">Submit</button>
-             
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
     );
   }
 }

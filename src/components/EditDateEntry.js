@@ -3,6 +3,7 @@ import firebase from '../Firebase';
 // import { Link } from 'react-router-dom';
 import Header from './Header';
 import DatePicker from "react-datepicker";
+import './stylesheet.css'
  
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -12,9 +13,10 @@ class EditDateEntry extends Component {
     super(props);
     this.state = {
       key: '',
-      date: Date(),
+      date: new Date(),
       quantity: '',
       comments: '',
+      // readableDate: new Date(),
     };
   }
 
@@ -25,11 +27,17 @@ class EditDateEntry extends Component {
         const entry = doc.data();
         this.setState({
           key: doc.id,
-          date: entry.date,
+          date: new Date(entry.date.seconds*1000).toLocaleDateString("en-IN"),
           quantity: entry.quantity,
           comments: entry.comments,
         });
-      } else {
+        console.log(this.state.date)
+        // date = new Date(this.state.date.date.seconds*1000).toLocaleDateString("en-IN");
+     
+        // this.setState({
+        //     readableDate: date,
+        // })
+    } else {
         console.log("No such document!");
       }
     });
@@ -39,6 +47,12 @@ class EditDateEntry extends Component {
     const state = this.state
     state[e.target.name] = e.target.value;
     this.setState({tracker:state});
+  }
+
+  handleDateChange(startDate) {
+    this.setState({
+      date: startDate
+    })
   }
 
   onSubmit = (e) => {
@@ -54,7 +68,7 @@ class EditDateEntry extends Component {
     }).then((docRef) => {
       this.setState({
         key: '',
-        date: '',
+        date: new Date(date.seconds*1000).toLocaleDateString("en-IN"),
         quantity: '',
         comments: ''
       });
@@ -67,33 +81,36 @@ class EditDateEntry extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <Header/>
-            <h3 className="panel-title">
-              EDIT ENTRY
-            </h3>
-          </div>
-          <div className="panel-body">
-            <form onSubmit={this.onSubmit}>
-            <div className="form-group">
-                <label for="date">Date:</label>
-                <DatePicker name="date" selected={this.state.date} value={this.state.date} onChange={this.handleDateChange} dateFormat="dd/MM/yyyy"/>
-              </div> 
-              <div className="form-group">
-                <label for="quantity">Quantity:</label>
-                <input type="number" className="form-control" name="quantity" value={this.state.quantity} onChange={this.onChange} placeholder={this.state.quantity} />                
+      <div>
+        <Header/>
+            <div className="container">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h3 className="panel-title">
+                    EDIT ENTRY
+                  </h3>
+                </div>
+                <div className="panel-body">
+                  <form onSubmit={this.onSubmit}>
+                  <div className="form-group">
+                      <label for="date">Date:</label>
+                      
+                      <DatePicker name="date" selected={this.state.date} value={this.state.date} onChange={this.handleDateChange} dateFormat="dd/MM/yyyy"/>
+                    </div> 
+                    <div className="form-group">
+                      <label for="quantity">Quantity:</label>
+                      <input type="number" className="form-control" name="quantity" value={this.state.quantity} onChange={this.onChange} placeholder={this.state.quantity} />                
+                    </div>
+                    <div className="form-group">
+                      <label for="comments">Comments:</label>
+                      <textarea className="form-control" name="comments" onChange={this.onChange} cols="80" rows="3" placeholder={this.state.comments}/>
+                    </div>
+                    <button type="submit" className="btn btn-success">Submit</button>
+                  </form>
+                </div>
               </div>
-              <div className="form-group">
-                <label for="comments">Comments:</label>
-                <textarea className="form-control" name="comments" onChange={this.onChange} cols="80" rows="3" placeholder={this.state.comments}/>
-              </div>
-              <button type="submit" className="btn btn-success">Submit</button>
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
     );
   }
 }

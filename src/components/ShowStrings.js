@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import firebase from '../Firebase';
 import Header from './Header';
+import './stylesheet.css';
 
 class ShowStrings extends Component {
   constructor(props) {
@@ -77,44 +78,46 @@ class ShowStrings extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <Header/>
-            <h3 className="panel-title">
-              {this.state.tracker.title}
-            </h3>
-            <Link to={`/edit/${this.state.key}`}><h5>{this.state.tracker.description}</h5></Link>
-          </div>
-          <div className="panel-body">
-            <h4><Link to={`/showstrings/${this.props.match.params.id}/createstringentry`}>Add new entry</Link></h4>
-            <table className="table table-stripe">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Canal</th>
-                  <th>Closest Town</th>
-                  <th>Comments</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.entries?.map(entry =>
-                  <tr> 
-                    <td><Link to={`/showstrings/${this.props.match.params.id}/editstringentry/${entry.key}`}>{entry.name}</Link></td>
-                    <td>{entry.canal}</td>
-                    <td>{entry.closesttown}</td>
-                    <td>{entry.comments}</td>
-                    <td><button onClick={this.deleteEntry.bind(this, entry.key).bind(this, this.state.tracker.key)} className="btn btn-danger">Delete Entry</button></td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-          {/* <Link to={`/edit/${this.state.key}`} className="btn btn-success">Edit</Link>&nbsp; */}
-            <button onClick={this.delete.bind(this, this.state.key)} className="btn btn-danger">Delete Tracker</button>
+      <div>
+        <Header/>
+            <div className="container">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h3 className="panel-title">
+                    {this.state.tracker.title}
+                  </h3>
+                  <Link to={`/edit/${this.state.key}`}><h5 className="description">{this.state.tracker.description}</h5></Link>
+                </div>
+                <div className="panel-body">
+                  <h4 className="btn btn-success"><Link to={`/showstrings/${this.props.match.params.id}/createstringentry`}>Add new entry</Link></h4>
+                  <table className="table table-stripe">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Canal</th>
+                        <th>Closest Town</th>
+                        <th>Comments</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.entries?.map(entry =>
+                        <tr> 
+                          <td><Link to={`/showstrings/${this.props.match.params.id}/editstringentry/${entry.key}`}>{entry.name}</Link></td>
+                          <td>{entry.canal}</td>
+                          <td>{entry.closesttown}</td>
+                          <td>{entry.comments}</td>
+                          <td><button onClick={this.deleteEntry.bind(this, entry.key).bind(this, this.state.tracker.key)} className="btn btn-danger">Delete</button></td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+                {/* <Link to={`/edit/${this.state.key}`} className="btn btn-success">Edit</Link>&nbsp; */}
+                  <button onClick={this.delete.bind(this, this.state.key)} className="btn btn-danger delete-tracker">Delete Tracker</button>
+              </div>
+            </div>   
         </div>
-      </div>
     );
   }
 }

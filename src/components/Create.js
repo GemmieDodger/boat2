@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import firebase from '../Firebase';
 import { Link } from 'react-router-dom';
 import Header from './Header';
+import './stylesheet.css';
+
 
 class Create extends Component {
 
@@ -49,36 +51,39 @@ class Create extends Component {
   render() {
     const { title, description, boat } = this.state;
     return (
-      <div className="container">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <Header/>
-            <h3 className="panel-title">
-              ADD TRACKER
-            </h3>
-          </div>
-          <div className="panel-body">
-            <h4><Link to="/" className="btn btn-primary">Return to Tracker List</Link></h4>
-            <form onSubmit={this.onSubmit}>
-              <div className="form-group">
-                <label for="title">Title:</label>
-                <input type="text" className="form-control" name="title" value={title} onChange={this.onChange} placeholder="Title" />
+      <div>
+        <Header/>
+            <div className="container">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+
+                  <h3 className="panel-title">
+                    ADD TRACKER
+                  </h3>
+                </div>
+                <div className="panel-body">
+                  <h4><Link to="/" className="btn btn-primary">Return to Tracker List</Link></h4>
+                  <form onSubmit={this.onSubmit}>
+                    <div className="form-group">
+                      <label for="title">Title:</label>
+                      <input type="text" className="form-control" name="title" value={title} onChange={this.onChange} placeholder="Title" />
+                    </div>
+                    <div className="form-group">
+                      <label for="description">Description:</label>
+                      <textArea className="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{description}</textArea>
+                    </div>
+                    <div className="form-group">
+                      <label for="boat">Boat name:</label>
+                      <input type="text" className="form-control" name="boat" value={boat} onChange={this.onChange} placeholder="Boat Name" />
+                    </div>
+                    
+                      <button type="submit"  className="btn btn-success">Submit</button>
+                  
+                  </form>
+                </div>
               </div>
-              <div className="form-group">
-                <label for="description">Description:</label>
-                <textArea className="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{description}</textArea>
-              </div>
-              <div className="form-group">
-                <label for="boat">Boat name:</label>
-                <input type="text" className="form-control" name="boat" value={boat} onChange={this.onChange} placeholder="Boat Name" />
-              </div>
-              
-                <button type="submit"  className="btn btn-success">Submit</button>
-             
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
     );
   }
 }

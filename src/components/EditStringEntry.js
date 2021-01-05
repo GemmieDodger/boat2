@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../Firebase';
 // import { Link } from 'react-router-dom';
 import Header from './Header';
+import './stylesheet.css';
 
 class EditStringEntry extends Component {
 
@@ -69,37 +70,39 @@ class EditStringEntry extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <Header/>
-            <h3 className="panel-title">
-              EDIT ENTRY
-            </h3>
-          </div>
-          <div className="panel-body">
-            <form onSubmit={this.onSubmit}>
-              <div className="form-group">
-                <label for="name">Name:</label>
-                <input type="text" className="form-control" name="name" value={this.state.name} onChange={this.onChange} placeholder={this.state.name} />
+      <div>
+        <Header/>
+            <div className="container">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h3 className="panel-title">
+                    EDIT ENTRY
+                  </h3>
+                </div>
+                <div className="panel-body">
+                  <form onSubmit={this.onSubmit}>
+                    <div className="form-group">
+                      <label for="name">Name:</label>
+                      <input type="text" className="form-control" name="name" value={this.state.name} onChange={this.onChange} placeholder={this.state.name} />
+                    </div>
+                    <div className="canal">
+                      <label for="description">Canal:</label>
+                      <input type="text" className="form-control" name="canal" value={this.state.canal} onChange={this.onChange} placeholder={this.state.canal} />
+                    </div>
+                    <div className="form-group">
+                      <label for="closesttown">Closest Town:</label>
+                      <input type="text" className="form-control" name="closesttown" value={this.state.closesttown} onChange={this.onChange} placeholder={this.state.closesttown} />
+                    </div>
+                    <div className="form-group">
+                      <label for="comments">Comments:</label>
+                      <textarea type="text" className="form-control" name="comments" value={this.state.comments} onChange={this.onChange} placeholder={this.state.comments} />
+                    </div>
+                    <button type="submit" className="btn btn-success">Submit</button>
+                  </form>
+                </div>
               </div>
-              <div className="canal">
-                <label for="description">Canal:</label>
-                <input type="text" className="form-control" name="canal" value={this.state.canal} onChange={this.onChange} placeholder={this.state.canal} />
-              </div>
-              <div className="form-group">
-                <label for="closesttown">Closest Town:</label>
-                <input type="text" className="form-control" name="closesttown" value={this.state.closesttown} onChange={this.onChange} placeholder={this.state.closesttown} />
-              </div>
-              <div className="form-group">
-                <label for="comments">Comments:</label>
-                <textarea type="text" className="form-control" name="comments" value={this.state.comments} onChange={this.onChange} placeholder={this.state.comments} />
-              </div>
-              <button type="submit" className="btn btn-success">Submit</button>
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
     );
   }
 }

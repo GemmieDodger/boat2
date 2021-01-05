@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../Firebase';
 // import { Link } from 'react-router-dom';
 import Header from './Header';
+import './stylesheet.css';
 
 class Edit extends Component {
 
@@ -75,33 +76,35 @@ class Edit extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <Header/>
-            <h3 className="panel-title">
-              EDIT TRACKER
-            </h3>
-          </div>
-          <div className="panel-body">
-            <form onSubmit={this.onSubmit}>
-              <div className="form-group">
-                <label for="title">Title:</label>
-                <input type="text" className="form-control" name="title" value={this.state.title} onChange={this.onChange} placeholder={this.state.title} />
+      <div>
+        <Header/>
+            <div className="container">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h3 className="panel-title">
+                    EDIT TRACKER
+                  </h3>
+                </div>
+                <div className="panel-body">
+                  <form onSubmit={this.onSubmit}>
+                    <div className="form-group">
+                      <label for="title">Title:</label>
+                      <input type="text" className="form-control" name="title" value={this.state.title} onChange={this.onChange} placeholder={this.state.title} />
+                    </div>
+                    <div className="form-group">
+                      <label for="description">Description:</label>
+                      <input type="text" className="form-control" name="description" value={this.state.description} onChange={this.onChange} placeholder={this.state.description} />
+                    </div>
+                    <div className="form-group">
+                      <label for="boat">Boat name:</label>
+                      <input type="text" className="form-control" name="boat" value={this.state.boat} onChange={this.onChange} placeholder={this.state.boat} />
+                    </div>
+                    <button type="submit" className="btn btn-success">Submit</button>
+                  </form>
+                </div>
               </div>
-              <div className="form-group">
-                <label for="description">Description:</label>
-                <input type="text" className="form-control" name="description" value={this.state.description} onChange={this.onChange} placeholder={this.state.description} />
-              </div>
-              <div className="form-group">
-                <label for="boat">Boat name:</label>
-                <input type="text" className="form-control" name="boat" value={this.state.boat} onChange={this.onChange} placeholder={this.state.boat} />
-              </div>
-              <button type="submit" className="btn btn-success">Submit</button>
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
     );
   }
 }

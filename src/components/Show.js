@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../Firebase';
 import { Link } from 'react-router-dom';
 import Header from './Header';
+import './stylesheet.css';
 
 class Show extends Component {
 
@@ -39,26 +40,29 @@ class Show extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <Header/>
-            <h3 className="panel-title">
-              {this.state.tracker.title}
-            </h3>
-          </div>
-          <div className="panel-body">
-            <dl>
-              <dt>Description:</dt>
-              <dd>{this.state.tracker.description}</dd>
-              <dt>boat:</dt>
-              <dd>{this.state.tracker.boat}</dd>
-            </dl>
-            <Link to={`/edit/${this.state.key}`} className="btn btn-success">Edit</Link>&nbsp;
-            <button onClick={this.delete.bind(this, this.state.key)} className="btn btn-danger">Delete</button>
-          </div>
+      <div>
+        <Header/>
+            <div className="container">
+              <Header/>
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h3 className="panel-title">
+                    {this.state.tracker.title}
+                  </h3>
+                </div>
+                <div className="panel-body">
+                  <dl>
+                    <dt>Description:</dt>
+                    <dd>{this.state.tracker.description}</dd>
+                    <dt>boat:</dt>
+                    <dd>{this.state.tracker.boat}</dd>
+                  </dl>
+                  <Link to={`/edit/${this.state.key}`} className="btn btn-success">Edit</Link>&nbsp;
+                  <button onClick={this.delete.bind(this, this.state.key)} className="btn btn-danger">Delete</button>
+                </div>
+              </div>
+            </div>
         </div>
-      </div>
     );
   }
 }

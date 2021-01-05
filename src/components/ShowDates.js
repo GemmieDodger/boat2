@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import firebase from '../Firebase';
 import Header from './Header';
+import './stylesheet.css';
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
 
 class ShowDates extends Component {
   if 
@@ -57,9 +59,6 @@ class ShowDates extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const entries = []; 
     querySnapshot.forEach((doc) => {
-      // const dateInMillis = timeStampDate.seconds * 1000;
-      // var date = new Date(doc.date.toDateString());
-
 
       const { 
         quantity, 
@@ -80,42 +79,44 @@ class ShowDates extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <Header/>
-            <h3 className="panel-title">
-              {this.state.tracker.title}
-            </h3>
-            <Link to={`/showdates/${this.props.match.params.id}/edit/${this.state.key}`}><h5>{this.state.tracker.description}</h5></Link>
-          </div>
-          <div className="panel-body">
-            <h4><Link to={`/showdates/${this.props.match.params.id}/createdateentry`}>Add new entry</Link></h4>
-            <table className="table table-stripe">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Quantity</th>
-                  <th>Comments</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.entries?.map(entry =>
-                  <tr>
-                    <td><Link to={`/showdates/${this.props.match.params.id}/editdateentry/${entry.key}`}>{entry.date}</Link></td>
-                    <td>{entry.quantity}</td>
-                    <td>{entry.comments}</td>
-                    <td><button onClick={this.deleteEntry.bind(this, entry.key).bind(this, this.state.tracker.key)} className="btn btn-danger">Delete Entry</button></td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-          {/* <Link to={`/edit/${this.state.key}`} className="btn btn-success">Edit</Link>&nbsp; */}
-            <button onClick={this.delete.bind(this, this.state.key)} className="btn btn-danger">Delete Tracker</button>
+      <div>
+        <Header/>
+            <div className="container">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h3 className="panel-title">
+                    {this.state.tracker.title}
+                  </h3>
+                  <Link to={`/showdates/${this.props.match.params.id}/edit/${this.state.key}`}><h5 className="description">{this.state.tracker.description}</h5></Link>
+                </div>
+                <div className="panel-body">
+                  <h4 className="btn btn-success"><Link to={`/showdates/${this.props.match.params.id}/createdateentry`}>Add new entry</Link></h4>
+                  <table className="table table-stripe">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Quantity</th>
+                        <th>Comments</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.entries?.map(entry =>
+                        <tr>
+                          <td><Link to={`/showdates/${this.props.match.params.id}/editdateentry/${entry.key}`}>{entry.date}</Link></td>
+                          <td>{entry.quantity}</td>
+                          <td>{entry.comments}</td>
+                          <td><button onClick={this.deleteEntry.bind(this, entry.key).bind(this, this.state.tracker.key)} className="btn btn-danger">Delete Entry</button></td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+                {/* <Link to={`/edit/${this.state.key}`} className="btn btn-success">Edit</Link>&nbsp; */}
+                  <button onClick={this.delete.bind(this, this.state.key)} className="btn btn-danger delete-tracker">Delete Tracker</button>
+              </div>
+            </div>
         </div>
-      </div>
     );
   }
 }
