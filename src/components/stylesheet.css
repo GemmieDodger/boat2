@@ -36,6 +36,7 @@ header {
     font-family: 'Fredoka One', cursive;
     font-weight: bolder;
     margin-left: 5%;
+    margin-bottom: 0px;
 }
 
 .panel {
@@ -86,6 +87,8 @@ a:hover {
 }
 .btn-success, .btn-primary {
     margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 15px;
 }
 
 .btn {
