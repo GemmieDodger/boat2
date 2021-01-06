@@ -18,13 +18,13 @@ class App extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const trackers = [];
     querySnapshot.forEach((doc) => {
-      const { title, description, author } = doc.data();
+      const { title, description, boat } = doc.data();
       trackers.push({
         key: doc.id,
         doc, // DocumentSnapshot
         title,
         description,
-        author,
+        boat,
       });
     });
     console.log(trackers);
@@ -50,38 +50,42 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <Header/>
-            <h3 className="panel-title">
-              MY TRACKERS
-            </h3>
+      <div>
+        <Header/>
+          
+            <div className="container">
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h3 className="panel-title">
+                    MY TRACKERS
+                  </h3>
+                </div>
+                <div className="panel-body">
+                  <h4 className="btn btn-success"><Link to="/create">Add Tracker</Link></h4>
+                  <table className="table table-stripe">
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Boat Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.trackers.map(tracker =>
+                        <tr>
+                          <td><Link onClick={
+                            () => this.checkType(tracker.key, tracker.title)} to={this.state.path}>
+                            {tracker.title}</Link></td>
+                          <td>{tracker.description}</td>
+                          <td>{tracker.boat}</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+            </div>
           </div>
-          <div className="panel-body">
-            <h4><Link to="/create">Add Tracker</Link></h4>
-            <table className="table table-stripe">
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Author</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.trackers.map(tracker =>
-                  <tr>
-                    <td><Link onClick={
-                      () => this.checkType(tracker.key, tracker.title)} to={this.state.path}>
-                      {tracker.title}</Link></td>
-                    <td>{tracker.description}</td>
-                    <td>{tracker.author}</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        
       </div>
     );
   }
