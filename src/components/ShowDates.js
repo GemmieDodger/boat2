@@ -106,7 +106,7 @@ class ShowDates extends Component {
                           <td><Link to={`/showdates/${this.props.match.params.id}/editdateentry/${entry.key}`}>{entry.date}</Link></td>
                           <td>{entry.quantity}</td>
                           <td>{entry.comments}</td>
-                          <td><button onClick={this.deleteEntry.bind(this, entry.key).bind(this, this.state.tracker.key)} className="btn btn-danger">Delete Entry</button></td>
+                          <td><button onClick={this.deleteEntry.bind(this, entry.key).bind(this, this.state.tracker.key)} className="btn btn-danger">Delete</button></td>
                         </tr>
                       )}
                     </tbody>

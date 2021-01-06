@@ -27,7 +27,7 @@ class EditDateEntry extends Component {
         const entry = doc.data();
         this.setState({
           key: doc.id,
-          date: new Date(entry.date.seconds*1000).toLocaleDateString("en-IN"),
+          date: new Date(),
           quantity: entry.quantity,
           comments: entry.comments,
         });
@@ -68,7 +68,7 @@ class EditDateEntry extends Component {
     }).then((docRef) => {
       this.setState({
         key: '',
-        date: new Date(date.seconds*1000).toLocaleDateString("en-IN"),
+        date: '',
         quantity: '',
         comments: ''
       });
@@ -77,7 +77,7 @@ class EditDateEntry extends Component {
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
-  }
+  }//new Date(date.seconds*1000).toLocaleDateString("en-IN")
 
   render() {
     return (
