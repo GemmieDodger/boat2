@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../Firebase';
 // import { Link } from 'react-router-dom';
 import Header from './Header';
+import { Link } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import './stylesheet.css'
  
@@ -17,7 +18,6 @@ class EditDateEntry extends Component {
       date: new Date(),
       quantity: '',
       comments: '',
-      // readableDate: new Date(),
     };
     this.handleDateChange = this.handleDateChange.bind(this);
   }
@@ -93,10 +93,10 @@ class EditDateEntry extends Component {
                   </h3>
                 </div>
                 <div className="panel-body">
+                <h4><Link to={`/showdates/${this.props.match.params.id}`} className="btn btn-primary return">Return to Tracker</Link></h4>
                   <form onSubmit={this.onSubmit}>
                   <div className="form-group">
                       <label for="date">Date:</label>
-                      
                       <DatePicker name="date" selected={this.state.date} value={this.state.date} onChange={this.handleDateChange} dateFormat="dd/MM/yyyy"/>
                     </div> 
                     <div className="form-group">

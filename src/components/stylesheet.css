@@ -65,6 +65,10 @@ tr {
    
     
 }
+.options {
+    display: inline;
+    width: 100%;
+}
 a {
     color: #0442c9;
 }
@@ -72,12 +76,15 @@ a:hover {
     text-decoration: none;
     color: white;
  }
+.return {
+    background-color: #0442c9;
+}
 
-.btn-success a {
+.btn-success a, .btn-primary a {
     color: white;
   
 }
-.btn-success {
+.btn-success, .btn-primary {
     margin-left: 5px;
 }
 

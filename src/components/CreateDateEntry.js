@@ -62,13 +62,12 @@ class CreateDateEntry extends Component {
             <div className="container">
               <div className="panel panel-default">
                 <div className="panel-heading">
-
                   <h3 className="panel-title">
                     ADD ENTRY
                   </h3>
                 </div> 
                 <div className="panel-body">
-                  <h4><Link to={`/showdates/${this.props.match.params.id}`} className="btn btn-primary">Return to Tracker</Link></h4>
+                  <h4><Link to={`/showdates/${this.props.match.params.id}`} className="btn btn-primary return">Return to Tracker</Link></h4>
                   <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                       <label for="date">Date:</label>

@@ -89,7 +89,10 @@ class ShowStrings extends Component {
                   <Link to={`/edit/${this.state.key}`}><h5 className="description">{this.state.tracker.description}</h5></Link>
                 </div>
                 <div className="panel-body">
+                <div className="options">
                   <h4 className="btn btn-success"><Link to={`/showstrings/${this.props.match.params.id}/createstringentry`}>Add new entry</Link></h4>
+                  <h4 className="btn btn-primary return"><Link to={`/}`}>Return to Tracker</Link></h4>
+                </div>
                   <table className="table table-stripe">
                     <thead>
                       <tr>

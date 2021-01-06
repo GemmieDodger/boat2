@@ -60,7 +60,7 @@ class CreateStringEntry extends Component {
                   </h3>
                 </div> 
                 <div className="panel-body">
-                  <h4><Link to={`/trackers/${this.props.match.params.id}`} className="btn btn-primary">Return to Tracker</Link></h4>
+                  <h4><Link to={`/${this.props.match.params.id}`} className="btn btn-primary">Return to Tracker</Link></h4>
                   <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                       <label for="name">Name:</label>

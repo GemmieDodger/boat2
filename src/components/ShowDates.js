@@ -90,7 +90,10 @@ class ShowDates extends Component {
                   <Link to={`/showdates/${this.props.match.params.id}/edit/${this.state.key}`}><h5 className="description">{this.state.tracker.description}</h5></Link>
                 </div>
                 <div className="panel-body">
+                <div className="options">
                   <h4 className="btn btn-success"><Link to={`/showdates/${this.props.match.params.id}/createdateentry`}>Add new entry</Link></h4>
+                  <h4 className="btn btn-primary return"><Link to={`/}`} >Return to Tracker</Link></h4>
+                </div>
                   <table className="table table-stripe">
                     <thead>
                       <tr>
