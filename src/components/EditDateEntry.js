@@ -11,6 +11,7 @@ class EditDateEntry extends Component {
 
   constructor(props) {
     super(props);
+    this.col = firebase.firestore().collection('trackers').doc(this.props.match.params.id).collection('entries');
     this.state = {
       key: '',
       date: new Date(),
@@ -18,6 +19,7 @@ class EditDateEntry extends Component {
       comments: '',
       // readableDate: new Date(),
     };
+    this.handleDateChange = this.handleDateChange.bind(this);
   }
 
   componentDidMount() {
@@ -46,7 +48,7 @@ class EditDateEntry extends Component {
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
-    this.setState({tracker:state});
+    this.setState({state});
   }
 
   handleDateChange(startDate) {
@@ -77,7 +79,7 @@ class EditDateEntry extends Component {
     .catch((error) => {
       console.error("Error adding document: ", error);
     });
-  }//new Date(date.seconds*1000).toLocaleDateString("en-IN")
+  }
 
   render() {
     return (
